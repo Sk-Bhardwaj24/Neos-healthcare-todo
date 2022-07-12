@@ -21,6 +21,7 @@ const Form = styled.form`
     background-color: white;
     border: 1px solid black;
     color: black;
+    cursor: pointer;
   }
 `;
 const Todoinput = () => {

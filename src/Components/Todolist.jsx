@@ -6,7 +6,6 @@ import Timer from "./Timer";
 const Todolist = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
-  // const [isvalid,setvalid]=React.useState(true);
 
   const handleToggle = (id, time, isCompleted) => {
     if (time - 19800000 - new Date().getTime() <= 0) {

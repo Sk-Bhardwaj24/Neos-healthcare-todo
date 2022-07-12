@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTodo, deleteTodo } from "../Redux/action";
+import { toggleTodo } from "../Redux/action";
+import Timer from "./Timer";
 const Todolist = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
@@ -26,7 +27,6 @@ const Todolist = () => {
           </tr>
         </thead>
         <tbody>
-          {console.log(todos)}
           {todos.map((each) => (
             <tr key={each.id}>
               <th>{each.task}</th>
@@ -35,6 +35,12 @@ const Todolist = () => {
               ) : (
                 <th>complete</th>
               )}
+              <th>
+                <Timer
+                  time={each.totaltimeinms}
+                  registertime={each.registertime}
+                />
+              </th>
 
               <th onClick={() => handleToggle(each.id)}>Toggle</th>
             </tr>

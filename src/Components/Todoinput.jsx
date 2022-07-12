@@ -1,12 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { useForm } from "./Hook";
+import { useForm } from "./Hooks/Form";
 import { addTodo } from "../Redux/action";
+import Input from "./Input";
 const Todoinput = () => {
   const dispatch = useDispatch();
+  var dateControl = document.querySelector('input[type="date"]');
+  var timeControl = document.querySelector('input[type="time"]');
 
-  //   console.log(todos);
   const { formData, handleInputChange, handleSubmit } = useForm(
     {
       task: "",
@@ -14,14 +16,14 @@ const Todoinput = () => {
       time: "",
     },
     (formData) => {
-      //   console.log(formData);
       let payload = {
         ...formData,
+        totaltimeinms: dateControl.valueAsNumber + timeControl.valueAsNumber,
+        registertime: new Date().getTime(),
         isCompleted: false,
         id: uuidv4(),
       };
       dispatch(addTodo(payload));
-      console.log("hello");
     }
   );
 
@@ -29,25 +31,27 @@ const Todoinput = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="task"
+      <Input
+        type={"text"}
+        name={"task"}
         value={task}
         onChange={handleInputChange}
       />
       <br />
       <br />
-      <input
-        type="date"
-        name="date"
+
+      <Input
+        type={"date"}
+        name={"date"}
         value={date}
         onChange={handleInputChange}
       />
       <br />
       <br />
-      <input
-        type="time"
-        name="time"
+
+      <Input
+        type={"time"}
+        name={"time"}
         value={time}
         onChange={handleInputChange}
       />

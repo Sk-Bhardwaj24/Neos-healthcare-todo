@@ -11,11 +11,11 @@ const ExpiredNotice = () => {
   );
 };
 
-const CountdownTimer = ({ targetDate, id }) => {
+const CountdownTimer = ({ targetDate }) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
 
   if (days + hours + minutes + seconds <= 0) {
-    return <ExpiredNotice id={id} />;
+    return <ExpiredNotice />;
   } else {
     return (
       <ShowCounter

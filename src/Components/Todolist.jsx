@@ -6,15 +6,24 @@ import Timer from "./Timer";
 const Todolist = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
-  console.log(todos);
-  const handleToggle = (id) => {
-    let updatedtodo = todos.map((eachtodo) =>
-      eachtodo.id === id
-        ? { ...eachtodo, isCompleted: !eachtodo.isCompleted }
-        : eachtodo
-    );
+  // const [isvalid,setvalid]=React.useState(true);
 
-    dispatch(toggleTodo(updatedtodo));
+  const handleToggle = (id, time, isCompleted) => {
+    if (time - 19800000 - new Date().getTime() <= 0) {
+      return alert("You are late, wish you good luck ahead");
+    } else {
+      let data = isCompleted ? "Not completed" : "completed";
+      let status = window.confirm(`Have You ${data} this task`);
+      if (status) {
+        let updatedtodo = todos.map((eachtodo) =>
+          eachtodo.id === id
+            ? { ...eachtodo, isCompleted: !eachtodo.isCompleted }
+            : eachtodo
+        );
+
+        dispatch(toggleTodo(updatedtodo));
+      }
+    }
   };
   return (
     <div>
@@ -29,11 +38,13 @@ const Todolist = () => {
         </thead>
         <tbody>
           {todos.map((each) => (
-            <tr key={each.id}>
+            <tr key={each.id} style={{ border: "1px solid black" }}>
               <Th>{each.task}</Th>
 
               {each.isCompleted === false ? (
-                <Th>Not Done</Th>
+                <Th>
+                  <p style={{ color: "red" }}>Not Done</p>
+                </Th>
               ) : (
                 <Th>complete</Th>
               )}
@@ -45,7 +56,15 @@ const Todolist = () => {
                 />
               </Th>
 
-              <th onClick={() => handleToggle(each.id)}>Toggle</th>
+              <th
+                style={{ border: "1px solid black", cursor: "pointer" }}
+                onClick={() =>
+                  handleToggle(each.id, each.totaltimeinms, each.isCompleted)
+                }
+              >
+                {" "}
+                Toggle
+              </th>
             </tr>
           ))}
         </tbody>

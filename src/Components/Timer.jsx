@@ -8,7 +8,7 @@ export default function Timer({ time, id }) {
 
   return (
     <div>
-      <CountdownTimer targetDate={dateTimeAfterThisDays} id={id} />
+      <CountdownTimer targetDate={dateTimeAfterThisDays} />
     </div>
   );
 }

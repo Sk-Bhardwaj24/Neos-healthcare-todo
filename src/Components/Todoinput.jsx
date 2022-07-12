@@ -1,6 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "./Hook";
+import { addTodo } from "../Redux/action";
 const Todoinput = () => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos);
+  //   console.log(todos);
   const { formData, handleInputChange, handleSubmit } = useForm(
     {
       task: "",
@@ -8,7 +13,12 @@ const Todoinput = () => {
       time: "",
     },
     (formData) => {
-      console.log(formData);
+      //   console.log(formData);
+      let payload = {
+        ...formData,
+        isCompleated: false,
+      };
+      dispatch(addTodo(payload));
       console.log("hello");
     }
   );

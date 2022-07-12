@@ -8,7 +8,7 @@ export const useForm = (initialState = {}, onSubmit) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(onSubmit);
+    // console.log(onSubmit);
     onSubmit?.(formData);
   };
 

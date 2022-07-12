@@ -4,6 +4,25 @@ import { v4 as uuidv4 } from "uuid";
 import { useForm } from "./Hooks/Form";
 import { addTodo } from "../Redux/action";
 import Input from "./Input";
+import styled from "styled-components";
+const Form = styled.form`
+  background-color: lightblue;
+  border: 1px solid black;
+  padding: 80px;
+  /* box-sizing: border-box; */
+  .Btn {
+    width: 150px;
+    height: 50px;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+  }
+  .Btn:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+  }
+`;
 const Todoinput = () => {
   const dispatch = useDispatch();
   var dateControl = document.querySelector('input[type="date"]');
@@ -21,6 +40,7 @@ const Todoinput = () => {
         totaltimeinms: dateControl.valueAsNumber + timeControl.valueAsNumber,
         registertime: new Date().getTime(),
         isCompleted: false,
+        isExpire: false,
         id: uuidv4(),
       };
       dispatch(addTodo(payload));
@@ -30,7 +50,7 @@ const Todoinput = () => {
   const { task, date, time } = formData;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Input
         type={"text"}
         name={"task"}
@@ -57,8 +77,11 @@ const Todoinput = () => {
       />
       <br />
       <br />
-      <button type="submit">Submit</button>
-    </form>
+
+      <button className="Btn" type="submit">
+        Submit
+      </button>
+    </Form>
   );
 };
 

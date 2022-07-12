@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTodo } from "../Redux/action";
+import Th from "./Th";
 import Timer from "./Timer";
 const Todolist = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
-
+  console.log(todos);
   const handleToggle = (id) => {
     let updatedtodo = todos.map((eachtodo) =>
       eachtodo.id === id
@@ -20,27 +21,29 @@ const Todolist = () => {
       <table>
         <thead>
           <tr>
-            <th>Task</th>
-            <th>Status</th>
-            <th>Action</th>
-            <th>Time Left</th>
+            <Th>Task</Th>
+            <Th>Status</Th>
+            <Th>Time Left</Th>
+            <Th>Action</Th>
           </tr>
         </thead>
         <tbody>
           {todos.map((each) => (
             <tr key={each.id}>
-              <th>{each.task}</th>
+              <Th>{each.task}</Th>
+
               {each.isCompleted === false ? (
-                <th>Not Done</th>
+                <Th>Not Done</Th>
               ) : (
-                <th>complete</th>
+                <Th>complete</Th>
               )}
-              <th>
+              <Th>
                 <Timer
                   time={each.totaltimeinms}
                   registertime={each.registertime}
+                  id={each.id}
                 />
-              </th>
+              </Th>
 
               <th onClick={() => handleToggle(each.id)}>Toggle</th>
             </tr>

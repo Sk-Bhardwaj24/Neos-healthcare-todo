@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, TOGGLE_TODO } from "./action";
+import { ADD_TODO, VALID_TODO, TOGGLE_TODO } from "./action";
 
 export const reducer = (store = { todos: [] }, action) => {
   switch (action.type) {
@@ -7,7 +7,7 @@ export const reducer = (store = { todos: [] }, action) => {
         ...store,
         todos: [...store.todos, action.payload],
       };
-    case DELETE_TODO:
+    case VALID_TODO:
       return {
         ...store,
         todos: [...action.payload],

@@ -10,11 +10,12 @@ export const reducer = (store = { todos: [] }, action) => {
     case DELETE_TODO:
       return {
         ...store,
-        todos: [action.payload],
+        todos: [...action.payload],
       };
     case TOGGLE_TODO:
       return {
-        todos: [action.payload],
+        ...store,
+        todos: [...action.payload],
       };
     default:
       return store;
